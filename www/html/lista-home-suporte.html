@@ -1,0 +1,170 @@
+ <div ng-controller="ctrlHome">
+ <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+  		<h3 ng-click="carregaTicket()" style="cursor: pointer;" class="pull-left"><b>Usuário: {{u_Nome}} </b></h3><span id="contador" class="label  label-danger {{ab}}">{{qtdMsg}}</span>
+  		<button type="button"  data-toggle="modal" ng-click="carregaUsers()" data-target="#modal-filter" id="bt-filter" class="btn btn-info btn-lg pull-right"><i class="glyphicon glyphicon-filter"></i></button>
+      </div>
+    </nav>
+    <div class="topo-fake"> 	</div>
+	<div class="container sp">
+			<table class="table table-hover tickets"> 
+				<tbody>
+					<tr  ng-repeat="x in ListaTicket">
+						<td class="box"  ng-if="x.r.ticket_status == 0">
+							<a href="javascript:;" ng-click="proc_carregaMensagem(x.r.ticket_id)"class="c-chat">
+								<h5 ><b> {{x.r.nome_usuario_origem}} - TICKET {{x.r.ticket_id}}</b> </h5>
+								<p>{{x.r.ticket_mensagem.slice(0,49)}}
+								</p>
+								<span class="hora">	{{x.r.data_mensagem | date : 'fullDate'}}</span>
+							</a>
+						</td>
+					<td class="box"  ng-if="x.r.ticket_status == 1">
+							<a href="javascript:;" ng-click="proc_carregaMensagem(x.r.ticket_id)"class="c-chat">
+								<h5 style="color: #f0ad4e"><b>{{x.r.nome_usuario_origem}} - TICKET {{x.r.ticket_id}}</b> <i class="glyphicon glyphicon-eye-open"></i>                                                                                                                                                                          </h5>
+
+								<p>{{x.r.ticket_mensagem.slice(0,49)}}
+								</p>
+								<span class="hora">	{{x.r.data_mensagem | date : 'fullDate'}}</span>
+							</a>
+						</td>
+						<td class="box"  ng-if="x.r.ticket_status == 2">
+							<a href="javascript:;" ng-click="proc_carregaMensagem(x.r.ticket_id)"class="c-chat">
+								<h5 style="color: #5cb85c"><b>{{x.r.nome_usuario_origem}} - TICKET {{x.r.ticket_id}}</b> <i class="glyphicon glyphicon-ok"></i></h5>
+								<p>{{x.r.ticket_mensagem.slice(0,49)}}
+								</p>
+								<span class="hora">	{{x.r.data_mensagem | date : 'fullDate'}}</span>
+							</a>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+  	</div>
+<!-- <div class="footer-fake"></div>
+    <footer class="footer">
+      <div class="container">
+        <button id="bt-novo-ticket" ng-click="novoTicket()"  class="btn btn-success btn-lg btn-block"><i class="glyphicon glyphicon-plus"></i> <b>NOVO TICKET</b></button>
+      </div>
+    </footer> -->
+		<!-- modal filter -->
+				<div class="modal fade " id="modal-filter"  tabindex="-1" role="dialog">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">Filtrar Ticket</h4>
+				      </div>
+				      <form>
+				       		<div class="modal-body">
+					        	<div class="panel panel-default">
+								  <div class="panel-heading">FILTRO DATA</div>
+								  <div class="panel-body">
+								   		<div class="form-group"> 
+								   			<label for="data_ini">Data Inicio</label> 
+								   			<input type="text" class="form-control datepicker"  ng-focus="alertCss =''"  ng-model="data_ini"  data-date-format="mm/dd/yyyy"  id="data_ini" > 
+								   		</div>
+								   		<div class="form-group"> 
+								   			<label for="data_fini">Data Final</label> 
+								   			<input type="text"  class="form-control datepicker" ng-focus="alertCss ='' "  ng-model="data_fini" data-date-format="mm/dd/yyyy"  id="data_fini" > 
+								   		</div>
+								  </div>
+								</div>
+								<div class="panel panel-default">
+								  <div class="panel-heading">FILTRO STATUS</div>
+								  <div class="panel-body">
+								    	<div class="form-group"> 
+								   			<label for="status">Status</label> 
+								   			<select class="form-control" name="Tkstatus" ng-model="Tkstatus">
+											  <option value="">ABERTO</option>
+											  <option value="1">AGUARDANDO RESPOSTA</option>
+											  <option value="2">FECHADO</option>
+											</select>
+								   		</div>
+								  </div>
+								</div>
+								<div class="panel panel-default">
+								  <div class="panel-heading">FILTRO USUÁRIO</div>
+								  <div class="panel-body">
+								    	<div class="form-group"> 
+								   			<label for="status">Usuário</label> 
+								   			<input type="hidden" ng-model='idUserF'>
+								   			<input type="text" class="form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  ng-model="usuarioTicket">
+								   			 <ul class="dropdown-menu col-md-12 rel" aria-labelledby="dropdownMenu1">
+								   			 <li ng-repeat="x in PostDataResponse | orderBy:'r.usuario'| filter:usuarioTicket:usuario">
+											    <a ng-click="addUS(x.r.usuario, x.r.usuario_id)" href="javascript:;">{{ x.r.usuario_id + ', ' + x.r.usuario }}</a>
+											  </li>
+											    
+											  </ul>
+								   		</div>
+								  </div>
+								</div>
+
+								<br>
+								<div class="alert alert-danger {{alertCss}}" id="alertMsg">{{alertTxt}}</div>
+					     	</div>
+					    	<div class="modal-footer">
+					       		 <button id="bt-filter" ng-click="filtraTicket()" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-filter"></i> <b>FILTRAR</b></button>
+					    	</div>
+				      </form>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+		<!-- modal filter -->
+
+		<!-- modal Novo tickt -->
+				<div class="modal fade " id="modal-novo"  tabindex="-1" role="dialog">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">NOVO TICKET{{IdTicket}} </h4>
+				      </div>
+				      <form>
+				       		<div class="modal-body">
+				       				<input type="hidden" ng-model="IdTicket" >
+						   		<div class="form-group"> 
+						   			<label for="regiao">REGIÃO-USUÁRIO</label> 
+						   			<input type="text" class="form-control" id="regiao" placeholder="CIANORTE-JOÃO" disabled> 
+						   		</div>
+						   		<div class="form-group"> 
+						   			<label for="departamento">DEPARTAMENTO</label> 
+						   			<select name="departamento" class="form-control" id="departamento" disabled>
+						   				<option value="1">SUPORTE</option>
+						   			</select>
+						   		</div>
+								<div class="form-group">
+									<label for="departamento">MENSAGEM</label>
+									<textarea name="mensagem" ng-focus="alertCss ='' " ng-maxlength="260" ng-required="required" required="required" ng-model="ticket_mensagem" class="form-control" id="mensagem" ></textarea>
+								</div>
+								<br>	
+								<div class="alert alert-danger {{alertCss}}" id="alertMsg">{{alertTxt}}</div>
+					     	</div>
+					    	<div class="modal-footer">
+					       		 <button id="bt-salva-ticket" ng-click="salvaMsg()"  class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-send"></i> <b>ENVIAR</b></button>
+					    	</div>
+				      </form>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+		<!-- modal Novo tickt -->
+</div>
+<script type='text/javascript'>									  
+$('#data_ini').datepicker({
+ language: 'pt-BR',
+ autoclose: true,
+ format: 'dd/mm/yyyy',
+ todayHighlight: true,
+startDate: '-90d',
+ endDate:'+1d'
+});	
+
+$('#data_fini').datepicker({
+ language: 'pt-BR',
+ autoclose: true,
+ format: 'dd/mm/yyyy',
+ todayHighlight: true,
+startDate: '-90d',
+ endDate:'+1d'
+});	
+</script>

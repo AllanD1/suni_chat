@@ -1,0 +1,129 @@
+.form-login{
+    width: 600px;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin:0 auto;
+}
+.form-login .jumbotron {
+    float: left;
+}
+.txt-center{
+    text-align: center;
+}
+#bt-filter,#bt-voltar{
+    margin-top: 5px;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+.sp{
+    padding: 0 !important;
+}
+.topo-fake{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 56px;
+}
+.hora{
+    float: right;
+    font-size: 10px;
+
+}
+.tickets a{
+        text-decoration: none !important;
+}
+.tickets a:hover{
+    text-decoration: none !important;
+}
+.box p{
+    color: #666666;
+    margin-bottom: 2px;
+}
+.box h5{
+    margin: 2px 0px !important;
+}
+#contador{
+    margin-top: 10px;
+    display: none;
+}
+#contador.ab{
+    display: inline-block;
+}
+#bt-novo-ticket, #bt-responder, #bt-encerrar{
+    margin-top: 8px;
+}
+.chat{
+float: left;
+display: block;
+position: relative;
+width: 100%;
+}
+
+.wmsg{
+    float: left;
+    width: 100%;
+    display: block;
+}
+.msg-t{
+    display: block;
+    max-width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+
+}
+.msg-t-c{
+    left: 0;
+    background: #ebe4c3;
+    margin-right: 20px;
+    margin-left: 5px;
+    float: left;
+}
+.msg-t-s{
+    float: right;
+    background: #c3d6eb;
+    margin-left: 20px;
+    margin-right: 5px;
+}
+.msg-t .data-h{
+    text-align: right;
+    color: #999;
+    font-size: 10px;
+}
+.footer-fake{
+    display: block;
+    float: left;
+    width: 100%;
+    height: 65px;
+}
+
+#alertMsg{
+    display: none;
+}
+#alertMsg.ab{
+    display: block;
+}
+.rel{
+    position: relative !important;
+    width: 100%;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: 200px !important;
+}
+#retorno{
+    display: none;
+}
+#retorno.ab{
+    display: block;
+}
+.loadingoverlay{
+    z-index: 55555555555 !important;;
+}

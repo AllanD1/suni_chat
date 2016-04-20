@@ -1,0 +1,100 @@
+<div ng-controller="ctrlChat">
+	
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+  		<h3 class="pull-left"><b>SUPORTE </b></h3>
+  		<a type="button"  href="javascript:;" ng-click="paraLoadMsg()" id="bt-voltar" class="btn btn-info btn-lg pull-right"><i class="glyphicon glyphicon-arrow-left"></i></a>
+      </div>
+    </nav>
+    <div class="topo-fake"> 	</div>
+	<div class="container sp"> 
+		<div class="chat">
+			<div class="wmsg" ng-repeat="x in ListaMsg">
+				<div class="msg-t msg-t-s" ng-if="x.r.usuario_id == idUser">
+					<div class="txt">{{x.r.ticket_mensagem}}</div>
+					<div class="data-h">	{{x.r.data_mensagem}}</div>
+				</div>
+				<div class="msg-t msg-t-c" ng-if="x.r.usuario_id != idUser">
+					<div class="txt">{{x.r.ticket_mensagem}}</div>
+					<div class="data-h">	{{x.r.data_mensagem}}</div>
+				</div>
+			</div>
+			<!-- <div class="wmsg">
+				<div class="msg-t msg-t-s">
+					<div class="txt">Id nam possim propriae omittantur, sit percipit pericula erroribus ea.</div>
+					<div class="data-h">22:51</div>
+				</div>
+			</div>  -->
+		
+					
+	  	</div>
+	</div>
+	<div class="footer-fake"></div>
+    <footer class="footer"  ng-if="statusID < 2">
+      <div class="container">
+			<div class="col-md-6 col-xs-6 sp">
+			        <button id="bt-encerrar"  data-toggle="modal"  data-target="#encerrar" class="btn btn-danger btn-lg btn-block"><i class="glyphicon glyphicon-remove"></i> <b>ENCERRAR</b></button>
+			</div>
+			<div class="col-md-6 col-xs-6 sp">      
+        		<button id="bt-responder"  data-toggle="modal" data-target="#responder" class="btn btn-success btn-lg btn-block"><i class="glyphicon glyphicon-send"></i> <b>RESPONDER</b></button>
+        	</div>
+      </div>
+    </footer>
+		
+
+		<!-- modal Novo tickt -->
+				<div class="modal fade " id="responder"  tabindex="-1" role="dialog">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">RESPONDER</h4>
+				      </div>
+				      <form id="form-mensagem">
+				       		<div class="modal-body">
+						   			
+								<div class="form-group">
+									<label for="departamento">MENSAGEM</label>
+									<textarea name="mensagem"  ng-focus="alertCss ='' "ng-maxlength="260" ng-required="required" required="required" ng-model="ticket_mensagem" class="form-control" id="mensagem" ></textarea>
+										<br>	
+									<div class="alert alert-danger {{alertCss}}" id="alertMsg">{{alertTxt}}</div>
+								</div>
+
+					     	</div>
+					    	<div class="modal-footer">
+					       		 <button id="bt-salva-ticket" ng-click="salvaMsgChat()" class="btn btn-primary btn-lg btn-block"><i class="glyphicon glyphicon-send"></i> <b>ENVIAR</b></button>
+					    	</div>
+				      </form>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+		<!-- modal Novo tickt -->
+		<!-- modal encerrar -->
+				<div class="modal fade " id="encerrar"  tabindex="-1" role="dialog">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">ENCERRAR</h4>
+				      </div>
+				      <form id="form-mensagem">
+				       		<div class="modal-body">
+						   		<div class="alert alert-warning" role="alert"><h4 style="text-align: center;">Deseja mesmo encerrar este ticket?</h4></div>
+
+
+					     	</div>
+					    	<div class="modal-footer">
+					    			<div class="col-md-6 col-xs-6">
+					    				
+					       		 <button id="bt-salva-ticket" data-dismiss="modal" aria-label="Close" class="btn btn-warning btn-md btn-block"><i class="glyphicon glyphicon-remove"></i> <b>NÃO</b></button>
+					    			</div>
+					    			<div class="col-md-6 col-xs-6">
+					       		 		<button id="bt-salva-ticket" ng-click="fecha_ticket(IdT)" class="btn btn-success btn-md btn-block"><i class="glyphicon glyphicon-ok"></i> <b>SIM</b></button>
+					    				
+					    			</div>
+				      </form>
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+		<!-- modal encerrar -->
+</div>

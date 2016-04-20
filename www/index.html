@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>SUNI SUPORTE</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<link rel="stylesheet" href="css/index.css">		
+</head>
+<body OnLoad='document.form_login.username.focus();'>
+<br>
+<div class="container">
+      	<div class="form-login">	
+	     <div class="jumbotron">
+        	<h2 class="txt-center"><img src="img/logo.png" alt=""></h3>
+			<form id="form_login" name="form_login" action='http://192.168.254.101:4000/cgi-bin/sunix2.cgi' method='post' role="form" data-toggle="validator">
+			<input type='hidden' id='_strmetdo_' name='_strmetdo_' value='proclogin'>
+			<div class="form-group">	
+				<div class="input-group">
+				  <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+				  <input type="text" class="form-control" placeholder="Login" data-toggle="validator" style='text-transform: uppercase' id='username' name='username' required>
+				</div>
+			</div>		
+				<br>
+				<div class="form-group">	
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-asterisk"></i></span>
+					  <input type="password" class="form-control" data-toggle="validator" data-minlength="1" placeholder="Senha" style='text-transform: uppercase' id='password' name='password' required>
+					</div>
+				</div>		
+				<br>
+				<div class="input-group pull-right">
+						<button type="submit" id="bt-login"  class="btn btn-success pull-right"> <i class="glyphicon glyphicon-ok"> </i> ENVIAR</button>
+				</div>
+				
+			</form>
+      	</div>
+	</div>
+  </div>
+    <script type='text/javascript' src='/js/jquery.min.js' charset='UTF-8'></script>
+	<script type='text/javascript' src='/js/bootstrap.min.js' charset='UTF-8'></script>
+	<script type='text/javascript' src='/js/loadingoverlay.js' charset='UTF-8'></script>
+	<script type='text/javascript' src="/js/validator.min.js" charset='UTF-8'></script>
+	<script type='text/javascript'charset='UTF-8'>
+	$(function(){
+	 $('#form_login').validator().on('submit', function (e) {
+	  if (e.isDefaultPrevented()) {
+	 	
+	  } else {
+	    $.LoadingOverlay("show");
+	    setTimeout(function(){ $.LoadingOverlay("hide");}, 4000);
+	  }
+	  })
+      $('#username').focus();
+     });	
+	</script>
+</body>
+</html>
